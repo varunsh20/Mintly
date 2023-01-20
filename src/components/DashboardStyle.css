@@ -1,0 +1,373 @@
+.container{
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.main{
+  position: absolute;
+  left: 260px;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding-left: 40px;
+  width: 70%;
+}
+
+.hd{
+  width: 90%;
+  border: 4px solid black;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  border-radius: 20px;
+  background-color: #b100ff;
+  font-family: Mabry-Regular
+}
+
+.hd h2{
+  margin: 20px;
+  color: white;
+  font-family: Mabry-Regular;
+}
+
+.publishform{
+  width: 90%;
+  height: auto;
+  border: 3px solid black;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  box-shadow: 8px 8px 5px rgba(128, 128, 128, 0.989);
+}
+
+.name-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 30px;
+  padding-left: 30px;
+  width: 70%;
+  height: 120px;
+  margin-bottom: 20px;
+}
+.name-div p {
+  font-family: Mabry-Regular;
+  font-size: 18px;
+}
+
+.name-div input {
+  width: 88%;
+  height: auto;
+  border: 1px solid black;
+  border-radius: 4px;
+  font-family: Mabry-Regular;
+  font-size: 16px;
+  padding: 10px 16px;
+}
+
+.type-div {
+  height: 235px;
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 90%;
+  height: fit-content;
+}
+.type-div p {
+  font-family: Mabry-Regular;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.category-container1{
+  display: flex;
+  flex-direction: row;
+}
+
+.category-container2{
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+.typecard1{
+  margin-top: 10px;
+  width: 50%;
+  height: 40px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  border: 2px solid black;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0px 0px 0px black;
+  }
+  .typecard1:hover{
+    background-color:#b100ff;
+    color: white;
+    transition: 0.2s all ;
+
+  }
+  .typecard2{
+    margin-top: 10px;
+    width: 50%;
+    height: 40px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    border: 2px solid black;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0px 0px 0px black;
+    }
+.typecard {
+  margin-top: 10px;
+  width: 50%;
+  height:40px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  border: 2px solid black;
+  overflow: hidden;
+  cursor: pointer;
+  margin-left:10px;
+  box-shadow: 0px 0px 0px black;
+  }
+
+  .typecard2:hover{
+    background-color:#b100ff;
+    color: white;
+    transition: 0.2s all ;
+
+  }
+
+  .typecard:hover{
+    background-color:#b100ff;
+    color: white;
+    transition: 0.2s all ;
+
+  }
+
+  .icon-div {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2px;
+  }
+  img {
+    width: 20px;
+  }
+  
+  .text-div {
+    margin-top: -8px;
+    flex:1;
+    height: 100%;
+    display: flex;
+  }
+  .text-div1 {
+    margin-top: -8px;
+    flex:1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  p {
+    margin-right: 10px;
+    margin-left: 5px;
+    font-family: Mabry-medium;
+    font-size: 15px;
+}
+
+.price-copy-div{
+  margin-top: 20px;
+  padding-right: 30px;
+  padding-left: 30px;
+  height: 110px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 80%;
+}
+.price-div {
+  display: flex;
+  flex-direction: column;
+  padding-right: 30px;
+}
+.price-div p {
+  font-family: Mabry-Regular;
+  font-size: 18px;
+}
+.price-div input {
+  width: 50%;
+  height: 25px;
+  border: 1px solid black;
+  border-radius: 4px;
+  font-family: Mabry-Regular;
+  font-size: 16px;
+  padding: 10px 16px;
+  background-color: white;
+}
+.copies-div {
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+}
+.copies-div p {
+  font-family: Mabry-Regular;
+  font-size: 18px;
+}
+.copies-div input {
+  width: 50%;
+  height: 25px;
+  border: 1px solid black;
+  border-radius: 4px;
+  font-family: Mabry-Regular;
+  font-size: 16px;
+  padding: 10px 16px;
+}
+
+.Upload{
+  padding-right: 30px;
+  padding-left: 30px;
+  height: fit-content;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 40px;
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+.cover-div,
+.content-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-div p {
+  font-family: Mabry-Regular;
+  font-size: 18px;
+}
+
+.cover-div p {
+  font-family: Mabry-Regular;
+  font-size: 18px;
+}
+
+.dotted-div {
+  width: 80%;
+  height: 200px;
+  border: 1px dashed black;
+  border-radius: 4px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.top {
+  flex:1.5;
+  display: flex;
+  align-items: end;
+}
+.bottom {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.uploadCover,
+.uploadContent {
+  width: 90%;
+  height: 35px;
+  border-radius: 5px;
+  font-family: Mabry-Regular;
+  font-size: 15px;
+  border: 1px solid black;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin:auto;
+}
+
+.uploadCover::-webkit-file-upload-button,
+        .uploadContent::-webkit-file-upload-button {
+          width: 100px;
+          height: 35px;
+          border: 1px solid black;
+          border-radius: 3px;
+          cursor: pointer;
+          margin-right: 10px;
+          font-family: Mabry-Regular;
+          background-color: black;
+          color: white;
+          font-size: 15px;
+          justify-content: center;
+          align-items: center;
+}
+
+.mbtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+}
+
+.mint{
+  background-color: #b100ff;
+  width: 90%;
+  border-radius: 50px;
+  cursor: pointer;
+  height: 50px;
+  font-size: 25px;
+  color: white;
+  margin-bottom: 20px;
+}
+.mint:hover{
+  background-color: #57027b;
+}
+
+@media screen and (max-width:850px){
+  .hd{
+    width: 70%;
+  }
+
+  .publishform{
+    width: 70%;
+  }
+
+  .category-container1{
+    display: flex;
+    flex-direction: column;
+  }
+  .typecard{
+    margin-left: 0;
+  }
+  .typecard2{
+    margin-left: 0;
+  }
+
+  .Upload{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .category-container2{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width:630px){
+  .hd{
+    width: 50%;
+  }
+
+  .publishform{
+    width: 50%;
+  }
+}
