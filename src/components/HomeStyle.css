@@ -300,7 +300,7 @@ width:90%;
     display: flex;
 }
 .blogo-div {
-    width: 20px;
+    width: 15px;
     height: 20px;
     display: flex;
     align-items: center;
@@ -308,7 +308,7 @@ width:90%;
 }
 
 .blogo-div img {
-     width: 30px;
+     width: 20px;
 }
     
 .bamount-div{

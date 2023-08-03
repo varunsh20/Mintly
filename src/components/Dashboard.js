@@ -16,7 +16,7 @@ export default function Dashboard(){
       contentURI:null
     });
 
-    //Functions for handling slider.
+    //Below functions are used for selecting the category of new tokens.
     const animationClickHandle = () => {
       setFormInput({
         ...formInput,
@@ -90,7 +90,6 @@ export default function Dashboard(){
   
     //Uploading data to IPFS using Web3Storage.
   
-
     //It returns our access token.
     function getAccessToken () {
       return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEY5MmZFMzkxQTExOTdGMzFDNWE0RjMxNzcxMDU5NzI3QmZBMzhmNzAiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NzM5NTYwNTY0NTAsIm5hbWUiOiJNaW50bHkgZm9yIEVSQzExNTUgVG9rZW5zIn0.HZjs_rOAhkimQKRbgf28CudSshv4qbipCIGr9Zn2StQ"
@@ -161,7 +160,7 @@ export default function Dashboard(){
       const tokenUri = await metadata();
       
     const contract = new ethers.Contract(
-      process.env.REACT_APP_ELECTION_ADDRESS,
+      process.env.REACT_APP_ADDRESS,
       Mintly.abi,
       signer
     )
@@ -202,6 +201,7 @@ export default function Dashboard(){
         position: toast.POSITION.TOP_CENTER
       });
     })
+    window.location.reload(true);
   }
   }
     return(
@@ -297,7 +297,7 @@ export default function Dashboard(){
                       ...formInput,
                       price: prop.target.value
                     })
-                  } placeholder="1 ETH" required/>
+                  } placeholder="1 MATIC" required/>
               </div>
               <div className="copies-div">
                 <p>Copies</p>
@@ -333,6 +333,7 @@ export default function Dashboard(){
         </div>
         </div>
         </div>
+        <ToastContainer/>
         </>
     );
 }

@@ -2,7 +2,7 @@ import "./HomeStyle.css"
 import p from "./imgs/p.jpg";
 import { useState,useEffect} from "react";
 import {Link,Element,Events,animateScroll as scroll,scroller} from "react-scroll";
-import elogo from "./imgs/eth.png";
+import mat from "./imgs/mat.png";
 import {ethers} from "ethers";
 import Mintly from './artifacts/contracts/Mintly.sol/Mintly.json';
 import {TailSpin} from 'react-loader-spinner';
@@ -133,7 +133,7 @@ export default function Home(){
         process.env.REACT_APP_RPC_URL 
       )
     const r_contract = new ethers.Contract(
-      process.env.REACT_APP_ELECTION_ADDRESS,
+      process.env.REACT_APP_ADDRESS,
         Mintly.abi,
         provider
       )
@@ -144,20 +144,21 @@ export default function Home(){
     const Alldata = 
       await Promise.all(unsoldLists.map(async (e)=>{
       const t_uri = await r_contract.uri(e.tokenId.toString());
-      const meta = await axios.get(t_uri);
+      const turi = t_uri.split("/");
+      const uri = `https://lens.infura-ipfs.io/ipfs/${turi[4]}/${turi[5]}`;
+      const meta = await axios.get(uri);
         return{
             id:e.tokenId.toNumber(),
             supplyleft:e.supplyLeft.toNumber(),
             price:ethers.utils.formatEther(e.price),
             category:e.category,
-            cover: meta.data.coverImageURI,
+            cover: `https://lens.infura-ipfs.io/ipfs/${meta.data.coverImageURI.split("/")[4]}/${meta.data.coverImageURI.split("/")[5]}`,
             name:meta.data.name
         };
       })
     );
     setContents(Alldata);
     setLoading(false);
-    console.log(Contents);
     filterItems();
   }
 
@@ -205,7 +206,7 @@ export default function Home(){
     const signer = providers.getSigner(); 
 
     const w_contract = new ethers.Contract(
-      process.env.REACT_APP_ELECTION_ADDRESS,
+      process.env.REACT_APP_ADDRESS,
       Mintly.abi,
       signer
     )
@@ -218,21 +219,20 @@ export default function Home(){
     //Toast is fired based on the status of transaction.
     await transaction.wait()
     .then( () => {
-      toast.success("Transaction successful.", {
+      toast.success("Token Purchased Successfully.", {
       position: toast.POSITION.TOP_CENTER
       });
     }).catch( () => {
-      toast.error("Transaction failed.", {
+      toast.error("Transaction Failed.", {
         position: toast.POSITION.TOP_CENTER
       });
     })
+    window.location.reload(true);
     }
     else{
-      toast.warn("Please install MetaMask.")
+      toast.warn("Please Install MetaMask.")
     }
   }
-
-
 
     return(
         <>
@@ -344,10 +344,10 @@ export default function Home(){
                       <p className="bprice-text">Price</p>
                       <div className="beth">
                         <div className="blogo-div">
-                          <img src={elogo} alt="logo"/>
+                          <img src={mat} alt="logo"/>
                         </div>
                         <div className="bamount-div">
-                          <p>{e.price} ETH</p>
+                          <p>{e.price} MATIC</p>
                         </div>
                       </div>
                      </div>
@@ -407,10 +407,10 @@ export default function Home(){
                       <p className="bprice-text">Price</p>
                       <div className="beth">
                         <div className="blogo-div">
-                          <img src={elogo} />
+                          <img src={mat} />
                         </div>
                         <div className="bamount-div">
-                          <p>{e.price} ETH</p>
+                          <p>{e.price} MATIC</p>
                         </div>
                       </div>
                      </div>
@@ -470,10 +470,10 @@ export default function Home(){
                       <p className="bprice-text">Price</p>
                       <div className="beth">
                         <div className="blogo-div">
-                          <img src={elogo} />
+                          <img src={mat} />
                         </div>
                         <div className="bamount-div">
-                          <p>{e.price} ETH</p>
+                          <p>{e.price} MATIC</p>
                         </div>
                       </div>
                      </div>
@@ -533,10 +533,10 @@ export default function Home(){
                       <p className="bprice-text">Price</p>
                       <div className="beth">
                         <div className="blogo-div">
-                          <img src={elogo} />
+                          <img src={mat} />
                         </div>
                         <div className="bamount-div">
-                          <p>{e.price} ETH</p>
+                          <p>{e.price} MATIC</p>
                         </div>
                       </div>
                      </div>
@@ -596,10 +596,10 @@ export default function Home(){
                       <p className="bprice-text">Price</p>
                       <div className="beth">
                         <div className="blogo-div">
-                          <img src={elogo} />
+                          <img src={mat} />
                         </div>
                         <div className="bamount-div">
-                          <p>{e.price} ETH</p>
+                          <p>{e.price} MATIC</p>
                         </div>
                       </div>
                      </div>
@@ -611,7 +611,7 @@ export default function Home(){
                     </div>
                   </div>
                   <div className="bbtn">
-                    <button className="buy" onClick={buyToken}>
+                    <button className="buy" onClick={()=>buyToken(e.id)}>
                     Buy Now
                     </button>
                   </div>
@@ -659,10 +659,10 @@ export default function Home(){
                       <p className="bprice-text">Price</p>
                       <div className="beth">
                         <div className="blogo-div">
-                          <img src={elogo} />
+                          <img src={mat} />
                         </div>
                         <div className="bamount-div">
-                          <p>{e.price} ETH</p>
+                          <p>{e.price} MATIC</p>
                         </div>
                       </div>
                      </div>
@@ -722,10 +722,10 @@ export default function Home(){
                       <p className="bprice-text">Price</p>
                       <div className="beth">
                         <div className="blogo-div">
-                          <img src={elogo} />
+                          <img src={mat} />
                         </div>
                         <div className="bamount-div">
-                          <p>{e.price} ETH</p>
+                          <p>{e.price} MATIC</p>
                         </div>
                       </div>
                      </div>
@@ -785,10 +785,10 @@ export default function Home(){
                       <p className="bprice-text">Price</p>
                       <div className="beth">
                         <div className="blogo-div">
-                          <img src={elogo} alt="logo"/>
+                          <img src={mat} alt="logo"/>
                         </div>
                         <div className="bamount-div">
-                          <p>{e.price} ETH</p>
+                          <p>{e.price} MATIC</p>
                         </div>
                       </div>
                      </div>
@@ -848,10 +848,10 @@ export default function Home(){
                       <p className="bprice-text">Price</p>
                       <div className="beth">
                         <div className="blogo-div">
-                          <img src={elogo} alt="logo"/>
+                          <img src={mat} alt="logo"/>
                         </div>
                         <div className="bamount-div">
-                          <p>{e.price} ETH</p>
+                          <p>{e.price} MATIC</p>
                         </div>
                       </div>
                      </div>
@@ -911,10 +911,10 @@ export default function Home(){
                       <p className="bprice-text">Price</p>
                       <div className="beth">
                         <div className="blogo-div">
-                          <img src={elogo} alt="eth"/>
+                          <img src={mat} alt="eth"/>
                         </div>
                         <div className="bamount-div">
-                          <p>{e.price} ETH</p>
+                          <p>{e.price} MATIC</p>
                         </div>
                       </div>
                      </div>

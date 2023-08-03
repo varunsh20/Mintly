@@ -1,6 +1,6 @@
 import SideBar from "./SideBar";
 import "./InventoryStyle.css";
-import elogo from "./imgs/eth.png";
+import mat from "./imgs/mat.png";
 import { useState,useEffect } from "react";
 import {ethers} from "ethers";
 import Mintly from './artifacts/contracts/Mintly.sol/Mintly.json';
@@ -31,7 +31,7 @@ export default function Inventory(){
         process.env.REACT_APP_RPC_URL
     )
     const contract = new ethers.Contract(
-        process.env.REACT_APP_ELECTION_ADDRESS,
+        process.env.REACT_APP_ADDRESS,
         Mintly.abi,
         provider
     )
@@ -42,16 +42,18 @@ export default function Inventory(){
     const Alldata = 
       await Promise.all(mylists.map(async (e)=>{
       const t_uri = await contract.uri(e.tokenId.toString());
-      const meta = await axios.get(t_uri);
+      const turi = t_uri.split("/");
+      const uri = `https://lens.infura-ipfs.io/ipfs/${turi[4]}/${turi[5]}`;
+      const meta = await axios.get(uri);
         return{
             id:e.tokenId.toNumber(),
             supplyleft:e.supplyLeft.toNumber(),
             price:ethers.utils.formatEther(e.price),
             category:e.category,
-            content: meta.data.contentURI,
-            cover: meta.data.coverImageURI,
+            content: `https://lens.infura-ipfs.io/ipfs/${meta.data.contentURI.split("/")[4]}/${meta.data.contentURI.split("/")[5]}`,
+            cover:  `https://lens.infura-ipfs.io/ipfs/${meta.data.coverImageURI.split("/")[4]}/${meta.data.coverImageURI.split("/")[5]}`,
             name:meta.data.name
-        };
+        }
       })
     );
     setContents(Alldata);
@@ -94,10 +96,10 @@ export default function Inventory(){
                 <p className="price-text">Price</p>
                 <div className="eth">
                   <div className="logo-div">
-                    <img src={elogo} />
+                    <img src={mat} />
                   </div>
                   <div className="amount-div">
-                    <p>{e.price} ETH</p>
+                    <p>{e.price} MATIC</p>
                   </div>
                 </div>
               </div>

@@ -16,7 +16,7 @@ export default function Navbar(){
         connectHandler();
     },[window.ethereum])
 
-    //Function for handling state of navbar.
+    //Function for handling the state of navbar.
     const handleClick = ()=>{
         setState(!state);
     }
@@ -31,7 +31,11 @@ export default function Navbar(){
     //Function for connecting metamask wallet.
     const connectHandler = async () => {
         if(window.ethereum){
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        await window.ethereum.request({
+                method: 'wallet_switchEthereumChain',
+                params: [{ chainId: '0x13881' }], // chainId must be in hexadecimal numbers
+              });
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts'});
         const c_account = ethers.utils.getAddress(accounts[0])
         setAccount(c_account);
         setConnected(true);
@@ -40,6 +44,14 @@ export default function Navbar(){
             toast.warn("Please install MetaMask.")
         }
     }
+    function reloadPage() {
+        window.location.reload(true);
+      }
+      // Checks for account changes
+      
+      if (window.ethereum) {
+        window.ethereum.on('accountsChanged', reloadPage);
+      }
 
     return(
         <>

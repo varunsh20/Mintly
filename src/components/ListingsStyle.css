@@ -124,7 +124,7 @@
     display: flex;
 }
 .logo-div {
-    width: 20px;
+    width: 15px;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -132,7 +132,7 @@
 }
 
 .logo-div img {
-     width: 30px;
+     width: 20px;
 }
     
 .amount-div{
