@@ -8,6 +8,7 @@ import {TailSpin} from 'react-loader-spinner';
 import axios from "axios";
 import {Link} from "react-router-dom";
 import {saveAs} from "file-saver";
+import { MediaRenderer } from "@thirdweb-dev/react";
 
 export default function Inventory(){
 
@@ -43,15 +44,15 @@ export default function Inventory(){
       await Promise.all(mylists.map(async (e)=>{
       const t_uri = await contract.uri(e.tokenId.toString());
       const turi = t_uri.split("/");
-      const uri = `https://lens.infura-ipfs.io/ipfs/${turi[4]}/${turi[5]}`;
+      const uri = `https://ipfs.io/ipfs/${turi[2]}/${turi[3]}`;
       const meta = await axios.get(uri);
         return{
             id:e.tokenId.toNumber(),
             supplyleft:e.supplyLeft.toNumber(),
             price:ethers.utils.formatEther(e.price),
             category:e.category,
-            content: `https://lens.infura-ipfs.io/ipfs/${meta.data.contentURI.split("/")[4]}/${meta.data.contentURI.split("/")[5]}`,
-            cover:  `https://lens.infura-ipfs.io/ipfs/${meta.data.coverImageURI.split("/")[4]}/${meta.data.coverImageURI.split("/")[5]}`,
+            cover: meta.data.coverImageURI,
+            content: meta.data.contentURI,
             name:meta.data.name
         }
       })
@@ -85,7 +86,7 @@ export default function Inventory(){
 
             <div className="cont">
             <div className="bgImage">
-                <img className="coverImg" src={e.cover} alt={e.name}/>
+                <MediaRenderer className="coverImg" src={e.cover} alt={e.name}/>
             </div>
           <div className="detail">
             <div className="title-div">

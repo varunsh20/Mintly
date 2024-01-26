@@ -9,6 +9,7 @@ import {TailSpin} from 'react-loader-spinner';
 import axios from "axios";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { MediaRenderer } from "@thirdweb-dev/react";
 
 export default function Home(){
     const[state,setState] = useState(false);
@@ -145,14 +146,15 @@ export default function Home(){
       await Promise.all(unsoldLists.map(async (e)=>{
       const t_uri = await r_contract.uri(e.tokenId.toString());
       const turi = t_uri.split("/");
-      const uri = `https://lens.infura-ipfs.io/ipfs/${turi[4]}/${turi[5]}`;
+      const uri = `https://ipfs.io/ipfs/${turi[2]}/${turi[3]}`;
       const meta = await axios.get(uri);
         return{
             id:e.tokenId.toNumber(),
             supplyleft:e.supplyLeft.toNumber(),
             price:ethers.utils.formatEther(e.price),
             category:e.category,
-            cover: `https://lens.infura-ipfs.io/ipfs/${meta.data.coverImageURI.split("/")[4]}/${meta.data.coverImageURI.split("/")[5]}`,
+            cover: meta.data.coverImageURI,
+            content: meta.data.contentURI,
             name:meta.data.name
         };
       })
@@ -333,7 +335,7 @@ export default function Home(){
 
                 <div className="conts">
                   <div className="ybgImage">
-                    <img className="ycoverImg" src={e.cover} alt={e.name}/>
+                    <MediaRenderer className="ycoverImg" src={e.cover} alt={e.name}/>
                   </div>
                 <div className="details">
                   <div className="btitle-div">
@@ -396,7 +398,7 @@ export default function Home(){
 
                 <div className="conts">
                   <div className="ybgImage">
-                    <img className="ycoverImg" src={e.cover} alt={e.name}/>
+                    <MediaRenderer className="ycoverImg" src={e.cover} alt={e.name}/>
                   </div>
                 <div className="details">
                   <div className="btitle-div">
@@ -459,7 +461,7 @@ export default function Home(){
 
                 <div className="conts">
                   <div className="ybgImage">
-                    <img className="ycoverImg" src={e.cover} alt={e.name}/>
+                    <MediaRenderer className="ycoverImg" src={e.cover} alt={e.name}/>
                   </div>
                 <div className="details">
                   <div className="btitle-div">
@@ -470,7 +472,7 @@ export default function Home(){
                       <p className="bprice-text">Price</p>
                       <div className="beth">
                         <div className="blogo-div">
-                          <img src={mat} />
+                          <MediaRenderer src={mat} />
                         </div>
                         <div className="bamount-div">
                           <p>{e.price} MATIC</p>
@@ -522,7 +524,7 @@ export default function Home(){
 
                 <div className="conts">
                   <div className="ybgImage">
-                    <img className="ycoverImg" src={e.cover} alt={e.name}/>
+                    <MediaRenderer className="ycoverImg" src={e.cover} alt={e.name}/>
                   </div>
                 <div className="details">
                   <div className="btitle-div">
@@ -585,7 +587,7 @@ export default function Home(){
 
                 <div className="conts">
                   <div className="ybgImage">
-                    <img className="ycoverImg" src={e.cover} alt={e.name}/>
+                    <MediaRenderer className="ycoverImg" src={e.cover} alt={e.name}/>
                   </div>
                 <div className="details">
                   <div className="btitle-div">
@@ -711,7 +713,7 @@ export default function Home(){
 
                 <div className="conts">
                   <div className="ybgImage">
-                    <img className="ycoverImg" src={e.cover} alt={e.name}/>
+                    <MediaRenderer className="ycoverImg" src={e.cover} alt={e.name}/>
                   </div>
                 <div className="details">
                   <div className="btitle-div">
@@ -774,7 +776,7 @@ export default function Home(){
 
                 <div className="conts">
                   <div className="ybgImage">
-                    <img className="ycoverImg" src={e.cover} alt={e.name}/>
+                    <MediaRenderer className="ycoverImg" src={e.cover} alt={e.name}/>
                   </div>
                 <div className="details">
                   <div className="btitle-div">
@@ -837,7 +839,7 @@ export default function Home(){
 
                 <div className="conts">
                   <div className="ybgImage">
-                    <img className="ycoverImg" src={e.cover} alt={e.name}/>
+                    <MediaRenderer className="ycoverImg" src={e.cover} alt={e.name}/>
                   </div>
                 <div className="details">
                   <div className="btitle-div">

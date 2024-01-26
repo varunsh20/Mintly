@@ -5,6 +5,8 @@ import {ethers} from "ethers";
 import Mintly from './artifacts/contracts/Mintly.sol/Mintly.json';
 import { toast, ToastContainer } from 'react-toastify';
 import { Web3Storage, File } from 'web3.storage/dist/bundle.esm.min.js';
+import { useStorageUpload } from "@thirdweb-dev/react";
+import axios from "axios";
 
 export default function Dashboard(){
     const [formInput, setFormInput] = useState({
@@ -16,6 +18,7 @@ export default function Dashboard(){
       contentURI:null
     });
 
+    const { mutateAsync: upload } = useStorageUpload();
     //Below functions are used for selecting the category of new tokens.
     const animationClickHandle = () => {
       setFormInput({
@@ -104,11 +107,15 @@ export default function Dashboard(){
     const coverHandle = async () => {
       const fileInput = document.getElementById('cover');
       const filePath = fileInput.files[0].name;
-      const coverCID = await uploadToIPFS(fileInput.files,0);
-  
+      const coverCID = await upload({ data: [fileInput.files[0]] });
+      if(coverCID){
+        toast.success("File Uploaded Successfully.", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }
       setFormInput({
         ...formInput,
-        coverImageURI: `https://ipfs.io/ipfs/${coverCID}/${filePath}`
+        coverImageURI: `https://ipfs.io/ipfs/${coverCID.toString().split("://")[1]}`
       })
     }
   
@@ -116,26 +123,16 @@ export default function Dashboard(){
     const contentHandle = async () => {
       const fileInput = document.getElementById('content');
       const filePath = fileInput.files[0].name;
-      const contentCID = await uploadToIPFS(fileInput.files,1);
-  
+      const contentCID = await upload({ data: [fileInput.files[0]] });
+      if(contentCID){
+        toast.success("File Uploaded Successfully.", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }
       setFormInput({
         ...formInput,
-        contentURI: `https://ipfs.io/ipfs/${contentCID}/${filePath}`
+        contentURI: `https://ipfs.io/ipfs/${contentCID.toString().split("://")[1]}`
       })
-    }
-  
-    const uploadToIPFS = async (files, flag) => {
-      const client = makeStorageClient()
-      const cid = await client.put(files)
-
-      // Fires toast when cover image or content is uploaded to ipfs.
-      if(flag==0 || flag==1){
-        toast.success("File Uploaded Successfully.", {
-          position: toast.POSITION.TOP_CENTER
-        });
-      }
-  
-      return cid
     }
   
     //This function uploads the metadata of our files and returns it's url.
@@ -146,8 +143,12 @@ export default function Dashboard(){
       const files = [
         new File([data], 'data.json')
       ]
-      const metaCID = await uploadToIPFS(files);
-      return `https://ipfs.io/ipfs/${metaCID}/data.json`
+      const metaCID = await upload({ data: [files] });
+      const response = await axios({
+        method:'get',
+        url:`https://ipfs.io/ipfs/${metaCID.toString().split("://")[1]}`
+      })
+      return response.data[0]
     }
 
 
@@ -159,7 +160,7 @@ export default function Dashboard(){
 
       const tokenUri = await metadata();
       
-    const contract = new ethers.Contract(
+      const contract = new ethers.Contract(
       process.env.REACT_APP_ADDRESS,
       Mintly.abi,
       signer

@@ -7,6 +7,7 @@ import Mintly from './artifacts/contracts/Mintly.sol/Mintly.json';
 import {TailSpin} from 'react-loader-spinner';
 import {Link} from "react-router-dom";
 import axios from "axios";
+import { MediaRenderer } from "@thirdweb-dev/react";
 
 export default function Listings(){
   const [loading,setLoading] = useState(true);
@@ -33,14 +34,15 @@ export default function Listings(){
       await Promise.all(mylists.map(async (e)=>{
       const t_uri = await contract.uri(e.tokenId.toString());
       const turi = t_uri.split("/");
-      const uri = `https://lens.infura-ipfs.io/ipfs/${turi[4]}/${turi[5]}`;
+      const uri = `https://ipfs.io/ipfs/${turi[2]}/${turi[3]}`;
       const meta = await axios.get(uri);
         return{
             id:e.tokenId.toNumber(),
             supplyleft:e.supplyLeft.toNumber(),
             price:ethers.utils.formatEther(e.price),
             category:e.category,
-            cover: `https://lens.infura-ipfs.io/ipfs/${meta.data.coverImageURI.split("/")[4]}/${meta.data.coverImageURI.split("/")[5]}`,
+            cover: meta.data.coverImageURI,
+            content: meta.data.contentURI,
             name:meta.data.name
         };
       })
@@ -49,7 +51,6 @@ export default function Listings(){
     setLoading(false);
   }
   getStats();
-  console.log(Contents);
   },[])
 
     return(
@@ -76,7 +77,7 @@ export default function Listings(){
                 return(
               <div className="cont">
             <div className="bgImage">
-                <img className="coverImg" src={e.cover} alt={e.name}/>
+                <MediaRenderer className="coverImg" src={e.cover} alt={e.name}/>
             </div>
           <div className="detail">
             <div className="title-div">

@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ThirdwebProvider } from "@thirdweb-dev/react";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+     <ThirdwebProvider
+      clientId="1dd340fb1746ae8918c5d7d9bb8fbc68" // You can get a client id from dashboard settings
+      activeChain="mumbai">
     <App />
+     </ThirdwebProvider>
   </React.StrictMode>
 );
 
