@@ -33,7 +33,7 @@ export default function Navbar(){
         if(window.ethereum){
         await window.ethereum.request({
                 method: 'wallet_switchEthereumChain',
-                params: [{ chainId: '0x13881' }], // chainId must be in hexadecimal numbers
+                params: [{ chainId: '0x13882' }], // chainId must be in hexadecimal numbers
               });
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts'});
         const c_account = ethers.utils.getAddress(accounts[0])
